@@ -49,6 +49,7 @@
 	</div>
 	<script>
       var map;
+      var markers = [];
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
@@ -71,13 +72,19 @@
           var coords = results.features[i].coordinates;
           var latLng = new google.maps.LatLng(coords[0],coords[1]);
           var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
+          	position: latLng,
+	        map: map
+	      });
           google.maps.event.addListener(marker, 'click', () => {
           	alert("hello you clicked on me");
           });
+          markers.push(marker);
         }
+        google.maps.event.addListener(map, 'zoom_changed', () => {
+	        for(var i = 0; i < markers.length; i++) {
+	        	markers[i].setVisible(map.getZoom() >= 14);
+	        }
+      	});
       }
     </script>
 	
