@@ -40,15 +40,31 @@
     		</ul>
 		</div>
 	</nav>
-	<h3 class="map-title">Hidden Gems</h3>
+	<h2 class="map-title">Points of Interest</h2>
 	<div id="map"></div>
 	<div id="poi">
-		<p>Name: </p><p id="poi-name"></p>
-		<p>Rating: </p><p id="poi-rating"></p>
-		<p>Address: </p><p id="poi-address"></p>
-		<p>Coordinates: </p><p id="poi-coordinates"></p>
+		<p id="poi-name"></p>
+		<p id="poi-rating"></p>
+		<p id="poi-address"></p>
+		<p id="poi-coordinates"></p>
 	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
 	<script>
+		// Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyAy6xB9KvplggjQUNA1Bk28M4adiDeOn8Y",
+	    authDomain: "hiddengems-185818.firebaseapp.com",
+	    databaseURL: "https://hiddengems-185818.firebaseio.com",
+	    // projectId: "hiddengems-185818",
+	    storageBucket: "",
+	    messagingSenderId: "865980313875"
+	  };
+	  firebase.initializeApp(config);
+	  var database = firebase.database();
+
       var map;
       var markers = [];
       function initMap() {
@@ -65,20 +81,84 @@
         script.src = 'js/poi.js';
         document.getElementsByTagName('head')[0].appendChild(script);
       }
+      /*
+      function renderInfo(e) {
+      	document.getElementById("poi-name").innerHTML = "Name: " + marker.name;
+      }
+      */
+
+      function renderInfo(marker, name, rating, address, latitude, longitude) {
+      	marker.addListener('click', ()=> {
+	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
+	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
+	      	document.getElementById("poi-address").innerHTML = "Address: " + address;
+	      	let coordinates = latitude + ", " + longitude;
+	      	document.getElementById("poi-coordinates").innerHTML = "Coordinates: " + coordinates;
+	    });
+      }
+
+      // var addr = database.ref("/features").once('value').then(function(s){
+      		// console.log(s.val());
+      // });
+
+/*
+      database.ref('/features/' + 0 + '/address').once('value').then(function(s) {
+      	console.log(s.val());
+      });
+      */
+
+      database.ref('/features/').once('value', function(snapshot) {
+  		snapshot.forEach(function(childSnapshot) {
+	    	var childKey = childSnapshot.key;
+	    	console.log("Child key", childKey);
+	    	var childData = childSnapshot.val();
+	    	console.log(childData);
+	      var coords = childData.coordinates;
+          var POIname = childData.name;
+          var POIrating = childData.rating;
+          var POIaddress = childData.address;
+          var POIlatitude = coords.x;
+          var POIlongitude = coords.y;
+          var latLng = new google.maps.LatLng(POIlatitude, POIlongitude);
+          var marker = new google.maps.Marker({
+          	position: latLng,
+	        map: map,
+	      });
+	      renderInfo(marker, POIname, POIrating, POIaddress, POIlatitude, POIlongitude);
+          markers.push(marker);
+        });
+        google.maps.event.addListener(map, 'zoom_changed', () => {
+	        for(var i = 0; i < markers.length; i++) {
+	        	markers[i].setVisible(map.getZoom() >= 14);
+	        }
+      	});
+	});
+
+    // database.ref('/').set({
+    //   username: "name",
+    //   email: "email"
+    // });
+
+      //alert(addr);
 
       // Loop through the results array and place a marker for each
       // set of coordinates.
+      /*
       window.eqfeed_callback = function(results) {
         for (var i = 0; i < results.features.length; i++) {
           var coords = results.features[i].coordinates;
+          var POIname = results.features[i].name;
+          var POIrating = 5;
+          var POIaddress = results.features[i].address;
+          var POIlatitude = results.features[i].coordinates[0];
+          var POIlongitude = results.features[i].coordinates[1];
           var latLng = new google.maps.LatLng(coords[0],coords[1]);
           var marker = new google.maps.Marker({
           	position: latLng,
-	        map: map
+	        map: map,
 	      });
-          google.maps.event.addListener(marker, 'click', () => {
-          	alert("hello you clicked on me");
-          });
+	      renderInfo(marker, POIname, POIrating, POIaddress, POIlatitude, POIlongitude);
+          	// alert("hello you clicked on me");
           markers.push(marker);
         }
         google.maps.event.addListener(map, 'zoom_changed', () => {
@@ -86,7 +166,7 @@
 	        	markers[i].setVisible(map.getZoom() >= 14);
 	        }
       	});
-      }
+      } */
     </script>
 	
     <script async defer
