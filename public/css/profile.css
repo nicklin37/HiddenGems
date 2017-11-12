@@ -1,0 +1,33 @@
+body {
+	margin-top: 25px;
+	padding: 20px;
+}
+
+#profile-title {
+	text-align: center;
+}
+
+#profile-main{
+	padding: 20px; 
+}
+
+#profile-feed{
+	padding: 20px; 
+}
+
+vr {
+    display: block;
+    width:10px;
+    background-color:#000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:150px;
+}
+
+.profile-content {
+	border-radius: 25px;
+    background: #73AD21;
+    padding: 20px; 
+
+}
