@@ -1,3 +1,24 @@
+.navbar-brand {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	padding-top: 25px;
+	padding-left: 50px;
+	font-size: 1.5em;
+}
+
+.my-navbar {
+	height: 10%;
+	font-size: 2em;
+}
+
+.active {
+	
+}
+
+.navbar-nav {
+	padding-top: 10px;
+	padding-right: 25px;
+}
+
 body{
 	background-image: url("../img/4.jpg");
 	background-position: top center;
@@ -32,4 +53,3 @@ body{
 	font-size: 20px;
 	font-family: "Vollkorn";
 }
-
