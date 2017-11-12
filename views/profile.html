@@ -16,30 +16,57 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
       href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu">
+<link rel="stylesheet" type="text/css" href="css/profile.css">
 
 </head>
 
 
 <body>
-	<div class="profile-content">
-	  
-		<div class="row">
-		    <div class="col-xs-6">
-		        <p>Username:</p>
-		        <p>Name:</p>
-		        <p>Location:</p>
-		    </div>
-		    <div class="col-xs-6">
-		        <p># Reviews Submitted</p>
-		        <p># Places Tried</p>
-		        <p>Friends</p>
-		    </div>
-	    </div>
-	    <div class="row">
-	    	<div class="col-xs-12">
-	    	<p>Feed</p>
-	    </div>
+	<nav class="my-navbar navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+ 		   <div class="navbar-header">
+   		 	  <a class="navbar-brand" href="/">
+   		 	  	<!--<img src="-->
+   		 	  HiddenGems</a>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right">
+    		  <li><a href="/map" class="button">Map</a></li>
+    		  <li><a href="/profile" class="button">Profile</a></li>
+    		</ul>
+		</div>
+	</nav>
 
-	</div>
+	<section id="profile-main">
+		<h3 id="profile-title">Profile</h3>
+		<div class="profile-content">
+		  
+			<div class="row">
+			    <div class="col-xs-6" border-right>
+			    	<div class="row">
+			    		<div class=col-xs-4>
+			    			Image here
+			    		</div>
+			    		<div class=col-xs-8>
+			        		<p>Username:</p>
+			        		<p>Name:</p>
+			        		<p>Location:</p>
+			        	</div>
+			    	</div>
+			    	<vr>
+			    </div>
+			    <div class="col-xs-6">
+			        <p># Reviews Submitted</p>
+			        <p># Places Tried</p>
+			        <p>Friends</p>
+			    </div>
+		    </div>
+		</div>
+	</section>
+
+	<section id="profile-feed">
+		<div class="profile-content">
+		    <p>Feed</p>
+		</div>
+	</section>
 </body>
 </html>
