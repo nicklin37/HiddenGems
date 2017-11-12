@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- If IE use the latest rendering engine -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Set the page to the width of the device and set the zoom level -->
+	<meta name="viewport" content="width = device-width, initial-scale = 1">
+	<meta name="description" content="Find places that are truly rewarding in your local area">
+	<meta name="author" content="Kyle Wong">
+
+	<title>Hidden Gems</title>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+	      href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu">
+	<link rel="stylesheet" type="text/css" href="css/map.css">
+	<style>
+		#map {
+        	height: 400px;
+        	width: 70%;
+        	margin: auto;
+    	}
+    </style>
+</head>
+
+
+<body>
+	<nav class="my-navbar navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+ 		   <div class="navbar-header">
+   		 	  <a class="navbar-brand" href="/">
+   		 	  	<!--<img src="-->
+   		 	  HiddenGems</a>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right">
+    		  <li><a href="/map" class="button">Map</a></li>
+    		  <li><a href="/profile" class="button">Profile</a></li>
+    		</ul>
+		</div>
+	</nav>
+	<h3 class="map-title">Hidden Gems</h3>
+	<div id="map"></div>
+	<div id="poi">
+		<p>Name: </p><p id="poi-name"></p>
+		<p>Rating: </p><p id="poi-rating"></p>
+		<p>Address: </p><p id="poi-address"></p>
+		<p>Coordinates: </p><p id="poi-coordinates"></p>
+	</div>
+	<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: new google.maps.LatLng(34.0635,-118.4455),
+          // mapTypeId: 'terrain'
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src = 'js/poi.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      window.eqfeed_callback = function(results) {
+        for (var i = 0; i < results.features.length; i++) {
+          var coords = results.features[i].coordinates;
+          var latLng = new google.maps.LatLng(coords[0],coords[1]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+          google.maps.event.addListener(marker, 'click', () => {
+          	alert("hello you clicked on me");
+          });
+        }
+      }
+    </script>
+	
+    <script async defer
+  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdpUvwoJeHyCvbCmhEpwnm0nwKZW6Vc&callback=initMap">
+	</script>
+</body>
+</html>
+
