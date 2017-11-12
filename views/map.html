@@ -26,8 +26,27 @@
 
 
 <body>
+	<nav class="my-navbar navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+ 		   <div class="navbar-header">
+   		 	  <a class="navbar-brand" href="/">
+   		 	  	<!--<img src="-->
+   		 	  HiddenGems</a>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right">
+    		  <li><a href="/map" class="button">Map</a></li>
+    		  <li><a href="/profile" class="button">Profile</a></li>
+    		</ul>
+		</div>
+	</nav>
 	<h3 class="map-title">Hidden Gems</h3>
 	<div id="map"></div>
+	<div id="poi">
+		<p>Name: </p><p id="poi-name"></p>
+		<p>Rating: </p><p id="poi-rating"></p>
+		<p>Address: </p><p id="poi-address"></p>
+		<p>Coordinates: </p><p id="poi-coordinates"></p>
+	</div>
 	<script>
       var map;
       function initMap() {
@@ -54,6 +73,9 @@
           var marker = new google.maps.Marker({
             position: latLng,
             map: map
+          });
+          google.maps.event.addListener(marker, 'click', () => {
+          	alert("hello you clicked on me");
           });
         }
       }
