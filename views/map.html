@@ -43,14 +43,15 @@
 	<div class="poi">
 		<p class="poi-text" id="poi-name"></p>
 		<p class="poi-text" id="poi-rating"></p>
-      <button class="rbutton" id="star1">1</button>
-      <button class="rbutton" id="star2">2</button>
-      <button class="rbutton" id="star3">3</button>
-      <button class="rbutton" id="star4">4</button>
-      <button class="rbutton" id="star5">5</button>
 		<p class="poi-text" id="poi-reviews"></p>
 		<p class="poi-text" id="poi-address"></p>
 		<p class="poi-text" id="poi-coordinates"></p>
+
+		<button class="rbutton" id="star1" style="visibility: hidden;">1</button>
+      	<button class="rbutton" id="star2" style="visibility: hidden;">2</button>
+     	<button class="rbutton" id="star3" style="visibility: hidden;">3</button>
+      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
+      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
 	</div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -96,6 +97,17 @@
       function renderInfo(marker, name, rating, reviews, address, latitude, longitude) {
       	marker.addListener('click', ()=> {
       		lookup = name;
+      		rating = Math.round(rating * 100) / 100;
+      		var elem1 = document.getElementById("star1");
+      		elem1.style.visibility = "visible";
+      		var elem2 = document.getElementById("star2");
+      		elem2.style.visibility = "visible";
+      		var elem3 = document.getElementById("star3");
+      		elem3.style.visibility = "visible";
+      		var elem4 = document.getElementById("star4");
+      		elem4.style.visibility = "visible";
+      		var elem5 = document.getElementById("star5");
+      		elem5.style.visibility = "visible";
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
@@ -161,6 +173,7 @@
     				var newRating = (prevRating * prevReviews + 5) / newReviews;
     				database.ref('/features/' + index + '/rating').set(newRating);
     				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				return;
     			}
     			index++;
     		});
@@ -180,6 +193,7 @@
     				var newRating = (prevRating * prevReviews + 4) / newReviews;
     				database.ref('/features/' + index + '/rating').set(newRating);
     				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				return;
     			}
     			index++;
     		});
@@ -199,6 +213,7 @@
     				var newRating = (prevRating * prevReviews + 3) / newReviews;
     				database.ref('/features/' + index + '/rating').set(newRating);
     				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				return;
     			}
     			index++;
     		});
@@ -218,6 +233,7 @@
     				var newRating = (prevRating * prevReviews + 2) / newReviews;
     				database.ref('/features/' + index + '/rating').set(newRating);
     				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				return;
     			}
     			index++;
     		});
@@ -237,6 +253,7 @@
     				var newRating = (prevRating * prevReviews + 1) / newReviews;
     				database.ref('/features/' + index + '/rating').set(newRating);
     				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				return;
     			}
     			index++;
     		});
