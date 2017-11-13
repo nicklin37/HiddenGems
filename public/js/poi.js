@@ -25,30 +25,30 @@ username_callback({
 	"user":[
 		{
 			"username": "Diddy",
-			"name": "Diddle Grease",
+			"name": "Jonathan Lee",
 			"location": "De Neve Late Night",
 			"image": "https://www.what-dog.net/Images/faces2/scroll0015.jpg",
-			"reviews": 420,
-			"visited": 42,
+			"reviews": 431,
+			"visited": 47,
 			"friends": "Bob"
 		},
 		{
 			"username": "Bob",
-			"name": "Bobbert Bingaling",
+			"name": "Bob Ortiz",
 			"location": "420 De Neve Dr, Los Angeles, CA 90095",
 			"image": "https://d1wn0q81ehzw6k.cloudfront.net/additional/thul/media/0eaa14d11e8930f5?w=400&h=400",
-			"reviews": 1337,
-			"visited": 42,
+			"reviews": 192,
+			"visited": 103,
 			"friends": ["Diddy","Riese"]
 
 		},
 		{
 			"username": "Riese",
-			"name": "Lol Lim",
+			"name": "Rachel Res",
 			"location": "Bruin Plate",
 			"image": "https://u.o0bc.com/avatars/no-user-image.gif",
-			"reviews": 420,
-			"visited": 42,
+			"reviews": 29,
+			"visited": 37,
 			"friends": "Bob"
 		}
 	]
