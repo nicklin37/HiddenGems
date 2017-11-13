@@ -66,9 +66,9 @@
 		<div class="profile-content">
 			<div class="row" style="padding-left: 2cm; padding-right: 2cm">
 		    	<h1>Feed</h1>
-		    	Diddy <img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 5!
+		    	Diddy <img src="https://www.what-dog.net/Images/faces2/scroll0015.jpg" height="30" width="30"> rated Diddy Riese a 5!
 		    	<br>
-		    	Riese<img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 1...
+		    	Riese <img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 1...
 			</div>
 		</div>
 	</section>
@@ -80,7 +80,16 @@
         script.src = 'js/poi.js';
         document.getElementsByTagName('head')[0].appendChild(script);
 
+
+
 		window.username_callback =  function(result){
+			function getFriendImage(friend_name){
+				for(var k=0; k<result.user.length;k++){
+					if(result.user[k].username == friend_name) return result.user[k].image;
+				}
+				return "https://u.o0bc.com/avatars/no-user-image.gif";
+			}
+
 			for(var i=0; i<result.user.length;i++){
 				if(result.user[i].username == username){
 					document.getElementById('user_name').innerHTML = "Username: " + result.user[i].username;
@@ -90,10 +99,12 @@
 					document.getElementById('user_numvis').innerHTML = "# Places Visited: " + result.user[i].visited;
 					for(var j=0;j<result.user[i].friends.length;j++){
 
-						document.getElementById('user_friendlist').innerHTML = document.getElementById('user_friendlist').innerHTML + "<br><img src=\"" +  "https://u.o0bc.com/avatars/no-user-image.gif" + "\" height=\"40\" width=\"40\">" + result.user[i].friends[j];
+						document.getElementById('user_friendlist').innerHTML = document.getElementById('user_friendlist').innerHTML + "<br><img src=\"" +  
+						getFriendImage(result.user[i].friends[j]) + "\" height=\"40\" width=\"40\">" + result.user[i].friends[j];
+						document.getElementById('user_friendlist').innerHTML
 					}
-					if(result.user[i].image == null) document.getElementById("profile-image").src="https://u.o0bc.com/avatars/no-user-image.gif";
-					else document.getElementById("profile-image").src=result.user[i].image;
+					document.getElementById("profile-image").src=result.user[i].image;
+
 					return;
 				}
 			}
