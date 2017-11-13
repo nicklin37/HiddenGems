@@ -44,7 +44,6 @@ body{
 }
 
 .info{
-	color: black;
 	text-align: center;
 	vertical-align: middle;
 	margin-left: 90px;
@@ -52,4 +51,26 @@ body{
 	margin-top: 50px;
 	font-size: 20px;
 	font-family: "Vollkorn";
+	color: transparent;
+	animation-name: fadein;
+	animation-delay: 1s;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes fadein{
+	from{color: transparent;}
+	to {color: black;}
+}
+
+.info:hover{
+	animation-play-state: paused;
+}
+.pic{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	top: 5px;
+	left: 10px;
 }
