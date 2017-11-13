@@ -146,21 +146,43 @@
           var marker = new google.maps.Marker({
           	position: latLng,
 	        map: map,
+	        rating: POIrating,
 	      });
 	      renderInfo(marker, POIname, POIrating, POIreviews, POIaddress, POIlatitude, POIlongitude);
-          markers.push(marker);
+	      if(POIname !== undefined && POIrating !== undefined && POIreviews !== undefined && POIaddress !== undefined && POIlatitude !== undefined && POIlongitude !== undefined)
+          	markers.push(marker);
         });
-        // will change number of markers dependent on rating
+        // depending on rating, change which markers you would like to show
         google.maps.event.addListener(map, 'zoom_changed', () => {
+        	var zoom = map.getZoom();
 	        for(var i = 0; i < markers.length; i++) {
-	        	markers[i].setVisible(map.getZoom() >= 14);
+	        	var rating = markers[i].rating;
+	        	if(zoom < 8)
+	        		markers[i].setVisible(false);
+	        	else if(zoom < 14)
+	        		markers[i].setVisible(rating >= 4.85);
+	        	else if(zoom === 14)
+	        		markers[i].setVisible(rating >= 4.6);
+	        	else if(zoom === 15)
+	        		markers[i].setVisible(rating >= 4.3);
+	        	else if(zoom === 16)
+	        		markers[i].setVisible(rating >= 4.0);
+	        	else if(zoom === 17)
+	        		markers[i].setVisible(rating >= 3.65);
+	        	else if(zoom === 18)
+	        		markers[i].setVisible(rating >= 3.2);
+	        	else if(zoom === 19)
+	        		markers[i].setVisible(rating >= 2.8);
+	        	else if(zoom >= 20)
+	        		markers[i].setVisible(true);
 	        }
       	});
 	  });
 
-	  // write to database in terms of rating 
+	  // update database fields in terms of reviews and rating 
 	  var index = 0;
 	  document.getElementById("star5").addEventListener("click", function(){
+	  	index = 0;
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -172,8 +194,16 @@
     				var prevRating = childData.rating;
     				var newReviews = prevReviews + 1;
     				var newRating = (prevRating * prevReviews + 5) / newReviews;
-    				database.ref('/features/' + index + '/rating').set(newRating);
-    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				var data = {
+    					name: childData.name,
+    					address: childData.address,
+    					coordinates: childData.coordinates,
+    					reviews: newReviews,
+    					rating: newRating
+    				};
+    				var updates = {};
+    				updates['/features/' + index] = data;
+    				database.ref().update(updates);
     				return;
     			}
     			index++;
@@ -181,6 +211,7 @@
     	});
 	  });
 	  document.getElementById("star4").addEventListener("click", function(){
+	  	index = 0;
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -192,8 +223,16 @@
     				var prevRating = childData.rating;
     				var newReviews = prevReviews + 1;
     				var newRating = (prevRating * prevReviews + 4) / newReviews;
-    				database.ref('/features/' + index + '/rating').set(newRating);
-    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				var data = {
+    					name: childData.name,
+    					address: childData.address,
+    					coordinates: childData.coordinates,
+    					reviews: newReviews,
+    					rating: newRating
+    				};
+    				var updates = {};
+    				updates['/features/' + index] = data;
+    				database.ref().update(updates);
     				return;
     			}
     			index++;
@@ -201,6 +240,7 @@
     	});
 	  });
 	  document.getElementById("star3").addEventListener("click", function(){
+	  	index = 0;
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -212,8 +252,16 @@
     				var prevRating = childData.rating;
     				var newReviews = prevReviews + 1;
     				var newRating = (prevRating * prevReviews + 3) / newReviews;
-    				database.ref('/features/' + index + '/rating').set(newRating);
-    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				var data = {
+    					name: childData.name,
+    					address: childData.address,
+    					coordinates: childData.coordinates,
+    					reviews: newReviews,
+    					rating: newRating
+    				};
+    				var updates = {};
+    				updates['/features/' + index] = data;
+    				database.ref().update(updates);
     				return;
     			}
     			index++;
@@ -221,6 +269,7 @@
     	});
 	  });
 	  document.getElementById("star2").addEventListener("click", function(){
+	  	index = 0;
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -232,8 +281,16 @@
     				var prevRating = childData.rating;
     				var newReviews = prevReviews + 1;
     				var newRating = (prevRating * prevReviews + 2) / newReviews;
-    				database.ref('/features/' + index + '/rating').set(newRating);
-    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				var data = {
+    					name: childData.name,
+    					address: childData.address,
+    					coordinates: childData.coordinates,
+    					reviews: newReviews,
+    					rating: newRating
+    				};
+    				var updates = {};
+    				updates['/features/' + index] = data;
+    				database.ref().update(updates);
     				return;
     			}
     			index++;
@@ -241,6 +298,7 @@
     	});
 	  });
 	  document.getElementById("star1").addEventListener("click", function(){
+	  	index = 0;
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -252,14 +310,23 @@
     				var prevRating = childData.rating;
     				var newReviews = prevReviews + 1;
     				var newRating = (prevRating * prevReviews + 1) / newReviews;
-    				database.ref('/features/' + index + '/rating').set(newRating);
-    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    				var data = {
+    					name: childData.name,
+    					address: childData.address,
+    					coordinates: childData.coordinates,
+    					reviews: newReviews,
+    					rating: newRating
+    				};
+    				var updates = {};
+    				updates['/features/' + index] = data;
+    				database.ref().update(updates);
     				return;
     			}
     			index++;
     		});
     	});
 	  });
+
     </script>
 	
     <script async defer
