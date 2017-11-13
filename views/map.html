@@ -145,6 +145,7 @@
           var marker = new google.maps.Marker({
           	position: latLng,
 	        map: map,
+	        rating: POIrating,
 	      });
 	      renderInfo(marker, POIname, POIrating, POIreviews, POIaddress, POIlatitude, POIlongitude);
 	      if(POIname !== undefined && POIrating !== undefined && POIreviews !== undefined && POIaddress !== undefined && POIlatitude !== undefined && POIlongitude !== undefined)
@@ -152,8 +153,27 @@
         });
         // depending on rating, change which markers you would like to show
         google.maps.event.addListener(map, 'zoom_changed', () => {
+        	var zoom = map.getZoom();
 	        for(var i = 0; i < markers.length; i++) {
-	        	markers[i].setVisible(map.getZoom() >= 14);
+	        	var rating = markers[i].rating;
+	        	if(zoom < 8)
+	        		markers[i].setVisible(false);
+	        	else if(zoom < 14)
+	        		markers[i].setVisible(rating >= 4.85);
+	        	else if(zoom === 14)
+	        		markers[i].setVisible(rating >= 4.6);
+	        	else if(zoom === 15)
+	        		markers[i].setVisible(rating >= 4.3);
+	        	else if(zoom === 16)
+	        		markers[i].setVisible(rating >= 4.0);
+	        	else if(zoom === 17)
+	        		markers[i].setVisible(rating >= 3.65);
+	        	else if(zoom === 18)
+	        		markers[i].setVisible(rating >= 3.2);
+	        	else if(zoom === 19)
+	        		markers[i].setVisible(rating >= 2.8);
+	        	else if(zoom >= 20)
+	        		markers[i].setVisible(true);
 	        }
       	});
 	  });
