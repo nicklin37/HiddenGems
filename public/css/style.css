@@ -79,6 +79,18 @@ body{
 	left: 10px;
 }
 
+.gif{
+	width: 80px;
+	height: 80px;
+	display: block;
+	margin: 0 auto;
+	border: 0;
+	animation-name: fadein;
+	animation-delay: 0s;
+	animation-duration: 4s;
+
+}
+
 .map-title {
 	text-align: center;
 	color: #000000;
