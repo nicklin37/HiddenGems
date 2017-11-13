@@ -19,3 +19,27 @@
 	]
 });
 */
+
+username_callback({
+	"type":"UserCollection",
+	"user":[
+		{
+			"username": "Diddy",
+			"name": "Diddle Grease",
+			"location": "Behind the counter",
+			"image": null
+		},
+		{
+			"username": "Bob",
+			"name": "Bobbert Bingaling",
+			"location": "Home",
+			"image": null
+		},
+		{
+			"username": "Lim",
+			"name": "Lol Lim",
+			"location": "Arbitrary coordinate",
+			"image": null
+		}
+	]
+});

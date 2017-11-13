@@ -17,9 +17,8 @@
 <link rel="stylesheet" type="text/css"
       href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu">
 <link rel="stylesheet" type="text/css" href="css/profile.css">
-
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
 
 <body>
 	<nav class="my-navbar navbar navbar-inverse navbar-fixed-top">
@@ -36,25 +35,21 @@
 		</div>
 	</nav>
 
+	<h3 id="profile-title">Profile</h3>
 	<section id="profile-main">
-		<h3 id="profile-title">Profile</h3>
 		<div class="profile-content">
-		  
 			<div class="row">
-			    <div class="col-xs-6" border-right>
+			    <div class="col-xs-6">
 			    	<div class="row">
-			    		<div class=col-xs-4>
-			    			Image here
-			    		</div>
-			    		<div class=col-xs-8>
-			        		<p>Username:</p>
-			        		<p>Name:</p>
-			        		<p>Location:</p>
+			    		<div class="col-xs-3"><img id="profile-image"></div>
+			    		<div class="col-xs-9">
+			        		<p id="username">Username: </p>
+			        		<p id="realname">Name: </p>
+			        		<p id="location">Location: </p>
 			        	</div>
 			    	</div>
-			    	<vr>
 			    </div>
-			    <div class="col-xs-6">
+			    <div class="col-xs-6 lvr">
 			        <p># Reviews Submitted</p>
 			        <p># Places Tried</p>
 			        <p>Friends</p>
@@ -68,5 +63,27 @@
 		    <p>Feed</p>
 		</div>
 	</section>
+
+	<script>
+		var username = "Bob";
+
+		var script = document.createElement('script');
+        script.src = 'js/poi.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+		window.username_callback =  function(result){
+			for(var i=0; i<result.user.length;i++){
+				if(result.user[i].username == username){
+					document.getElementById('username').innerHTML = "Username: " + result.user[i].username;
+					document.getElementById('realname').innerHTML = "Name: " + result.user[i].name;
+					document.getElementById('location').innerHTML = "Location: " + result.user[i].location;
+					if(result.user[i].image == null) document.getElementById("profile-image").src="https://u.o0bc.com/avatars/no-user-image.gif";
+					else document.getElementById("profile-image").src=result.user[i].image;
+					return;
+				}
+			}
+		}
+
+	</script>
 </body>
 </html>
