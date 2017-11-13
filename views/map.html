@@ -57,6 +57,7 @@
 	      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
 	      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
       	</div>
+      	<p id="feedback" style="visibility: hidden">Thanks for the feedback!</p>
 	</div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -117,6 +118,8 @@
       		divliner.style.visibility = "visible";
       		var rateStat = document.getElementById("rate-stat");
       		rateStat.style.visibility = "visible";
+      		var feed = document.getElementById("feedback");
+      		feed.style.visibility = "hidden";
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
@@ -197,6 +200,18 @@
 	  var index = 0;
 	  document.getElementById("star5").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -226,6 +241,18 @@
 	  });
 	  document.getElementById("star4").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -255,6 +282,18 @@
 	  });
 	  document.getElementById("star3").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -284,6 +323,18 @@
 	  });
 	  document.getElementById("star2").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -313,6 +364,18 @@
 	  });
 	  document.getElementById("star1").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;

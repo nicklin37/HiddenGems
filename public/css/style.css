@@ -102,7 +102,7 @@ body{
 	font-family: "Montserrat";
 }
 
-#rate-stat, #divline {
+#rate-stat, #divline, #feedback {
 	text-align: center;
 	font-family: "Montserrat";
 	font-size: 16px;
