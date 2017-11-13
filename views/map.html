@@ -170,7 +170,9 @@
 	        	if(zoom < 7)
 	        		markers[i].setVisible(false);
 	        	else if(zoom < 10)
-	        		markers[i].setVisible((rating >= 4.85 || reviews > 1000000));
+	        		markers[i].setVisible(reviews > 1000000);
+	        	else if(zoom < 13)
+	        		markers[i].setVisible(rating >= 4.85);
 	        	else if(zoom < 15)
 	        		markers[i].setVisible((rating >= 4.6 || reviews > 50000));
 	        	else if(zoom === 15)
