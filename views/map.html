@@ -13,9 +13,8 @@
 
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"
-	      href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu">
+      href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu|Montserrat|Vollkorn|Trebuchet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/map.css">
 	<style>
 		#map {
         	height: 400px;
@@ -40,13 +39,14 @@
     		</ul>
 		</div>
 	</nav>
-	<h2 class="map-title">Points of Interest</h2>
+	<h1 class="map-title">Points of Interest</h1>
 	<div id="map"></div>
-	<div id="poi">
-		<p id="poi-name"></p>
-		<p id="poi-rating"></p>
-		<p id="poi-address"></p>
-		<p id="poi-coordinates"></p>
+	<div class="poi">
+		<p class="poi-text" id="poi-name"></p>
+		<p class="poi-text" id="poi-rating"></p>
+		<p class="poi-text" id="poi-reviews"></p>
+		<p class="poi-text" id="poi-address"></p>
+		<p class="poi-text" id="poi-coordinates"></p>
 	</div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -70,16 +70,16 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
-          center: new google.maps.LatLng(34.0635,-118.4455),
+          center: new google.maps.LatLng(34.0689,-118.4452),
           // mapTypeId: 'terrain'
         });
 
         // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
+        // var script = document.createElement('script');
         // This example uses a local copy of the GeoJSON stored at
         // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'js/poi.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
+        // script.src = 'js/poi.js';
+        // document.getElementsByTagName('head')[0].appendChild(script);
       }
       /*
       function renderInfo(e) {
@@ -87,10 +87,11 @@
       }
       */
 
-      function renderInfo(marker, name, rating, address, latitude, longitude) {
+      function renderInfo(marker, name, rating, reviews, address, latitude, longitude) {
       	marker.addListener('click', ()=> {
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
+	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
 	      	document.getElementById("poi-address").innerHTML = "Address: " + address;
 	      	let coordinates = latitude + ", " + longitude;
 	      	document.getElementById("poi-coordinates").innerHTML = "Coordinates: " + coordinates;
@@ -107,15 +108,17 @@
       });
       */
 
+      // firebase
       database.ref('/features/').once('value', function(snapshot) {
   		snapshot.forEach(function(childSnapshot) {
-	    	var childKey = childSnapshot.key;
-	    	console.log("Child key", childKey);
-	    	var childData = childSnapshot.val();
-	    	console.log(childData);
+	      var childKey = childSnapshot.key;
+	      // console.log("Child key", childKey);
+	      var childData = childSnapshot.val();
+	      // console.log(childData);
 	      var coords = childData.coordinates;
           var POIname = childData.name;
           var POIrating = childData.rating;
+          var POIreviews = childData.reviews;
           var POIaddress = childData.address;
           var POIlatitude = coords.x;
           var POIlongitude = coords.y;
@@ -124,49 +127,18 @@
           	position: latLng,
 	        map: map,
 	      });
-	      renderInfo(marker, POIname, POIrating, POIaddress, POIlatitude, POIlongitude);
+	      renderInfo(marker, POIname, POIrating, POIreviews, POIaddress, POIlatitude, POIlongitude);
           markers.push(marker);
         });
+        // will change number of markers dependent on rating
         google.maps.event.addListener(map, 'zoom_changed', () => {
-	        for(var i = 0; i < markers.length; i++) {
-	        	markers[i].setVisible(map.getZoom() >= 14);
+	        for(var i = 0; i < markers.length; i++) {;
+	        	markers[i].setVisible(map.getZoom() >= 14)
 	        }
       	});
-	});
+	  });
 
-    // database.ref('/').set({
-    //   username: "name",
-    //   email: "email"
-    // });
-
-      //alert(addr);
-
-      // Loop through the results array and place a marker for each
-      // set of coordinates.
-      /*
-      window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].coordinates;
-          var POIname = results.features[i].name;
-          var POIrating = 5;
-          var POIaddress = results.features[i].address;
-          var POIlatitude = results.features[i].coordinates[0];
-          var POIlongitude = results.features[i].coordinates[1];
-          var latLng = new google.maps.LatLng(coords[0],coords[1]);
-          var marker = new google.maps.Marker({
-          	position: latLng,
-	        map: map,
-	      });
-	      renderInfo(marker, POIname, POIrating, POIaddress, POIlatitude, POIlongitude);
-          	// alert("hello you clicked on me");
-          markers.push(marker);
-        }
-        google.maps.event.addListener(map, 'zoom_changed', () => {
-	        for(var i = 0; i < markers.length; i++) {
-	        	markers[i].setVisible(map.getZoom() >= 14);
-	        }
-      	});
-      } */
+	  // write to database in terms of rating 
     </script>
 	
     <script async defer
