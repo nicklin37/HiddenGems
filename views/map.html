@@ -147,6 +147,7 @@
           	position: latLng,
 	        map: map,
 	        rating: POIrating,
+	        reviews: POIreviews,
 	      });
 	      renderInfo(marker, POIname, POIrating, POIreviews, POIaddress, POIlatitude, POIlongitude);
 	      if(POIname !== undefined && POIrating !== undefined && POIreviews !== undefined && POIaddress !== undefined && POIlatitude !== undefined && POIlongitude !== undefined)
@@ -175,6 +176,8 @@
 	        		markers[i].setVisible(rating >= 2.8);
 	        	else if(zoom >= 20)
 	        		markers[i].setVisible(true);
+	        	if(markers[i].reviews <= 2)
+	        		markers[i].setVisible(zoom >= 16);
 	        }
       	});
 	  });
