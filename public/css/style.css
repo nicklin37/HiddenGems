@@ -101,3 +101,21 @@ body{
 	font-size: 16px;
 	font-family: "Montserrat";
 }
+
+#rate-stat, #divline {
+	text-align: center;
+	font-family: "Montserrat";
+	font-size: 16px;
+}
+
+.rate-buttons {
+	text-align: center;
+}
+
+#star1, #star2, #star3, #star4, #star5 {
+	margin: auto;
+	text-align: center;
+	border-radius: 50%;
+	height: 30px;
+	width: 30px;
+}

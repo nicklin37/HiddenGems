@@ -26,7 +26,7 @@ username_callback({
 		{
 			"username": "Diddy",
 			"name": "Diddle Grease",
-			"location": "Behind the counter",
+			"location": "De Neve Late Night",
 			"image": "https://www.what-dog.net/Images/faces2/scroll0015.jpg",
 			"reviews": 420,
 			"visited": 42,
@@ -35,7 +35,7 @@ username_callback({
 		{
 			"username": "Bob",
 			"name": "Bobbert Bingaling",
-			"location": "Home",
+			"location": "420 De Neve Dr, Los Angeles, CA 90095",
 			"image": "https://d1wn0q81ehzw6k.cloudfront.net/additional/thul/media/0eaa14d11e8930f5?w=400&h=400",
 			"reviews": 1337,
 			"visited": 42,
@@ -45,7 +45,7 @@ username_callback({
 		{
 			"username": "Riese",
 			"name": "Lol Lim",
-			"location": "Arbitrary coordinate",
+			"location": "Bruin Plate",
 			"image": "https://u.o0bc.com/avatars/no-user-image.gif",
 			"reviews": 420,
 			"visited": 42,

@@ -46,13 +46,17 @@
 		<p class="poi-text" id="poi-rating"></p>
 		<p class="poi-text" id="poi-reviews"></p>
 		<p class="poi-text" id="poi-address"></p>
-		<p class="poi-text" id="poi-coordinates"></p>
+		<p class="poi-text" id="poi-coordinates"></p><br>
 
-		<button class="rbutton" id="star1" style="visibility: hidden;">1</button>
-      	<button class="rbutton" id="star2" style="visibility: hidden;">2</button>
-     	<button class="rbutton" id="star3" style="visibility: hidden;">3</button>
-      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
-      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
+		<p id="divline" style="visibility: hidden">==============================</p>
+		<p id="rate-stat" style="visibility: hidden">What do you think of this place? Rate it below!</p>
+		<div class="rate-buttons">
+			<button class="rbutton" id="star1" style="visibility: hidden;">1</button>
+	      	<button class="rbutton" id="star2" style="visibility: hidden;">2</button>
+	     	<button class="rbutton" id="star3" style="visibility: hidden;">3</button>
+	      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
+	      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
+      	</div>
 	</div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -109,6 +113,10 @@
       		elem4.style.visibility = "visible";
       		var elem5 = document.getElementById("star5");
       		elem5.style.visibility = "visible";
+      		var divliner = document.getElementById("divline");
+      		divliner.style.visibility = "visible";
+      		var rateStat = document.getElementById("rate-stat");
+      		rateStat.style.visibility = "visible";
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
