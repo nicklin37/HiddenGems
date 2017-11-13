@@ -19,3 +19,37 @@
 	]
 });
 */
+
+username_callback({
+	"type":"UserCollection",
+	"user":[
+		{
+			"username": "Diddy",
+			"name": "Diddle Grease",
+			"location": "Behind the counter",
+			"image": null,
+			"reviews": 420,
+			"visited": 42,
+			"friends": "Bob"
+		},
+		{
+			"username": "Bob",
+			"name": "Bobbert Bingaling",
+			"location": "Home",
+			"image": null,
+			"reviews": 1337,
+			"visited": 42,
+			"friends": ["Diddy","Riese"]
+
+		},
+		{
+			"username": "Lim",
+			"name": "Lol Lim",
+			"location": "Arbitrary coordinate",
+			"image": null,
+			"reviews": 420,
+			"visited": 42,
+			"friends": "Bob"
+		}
+	]
+});

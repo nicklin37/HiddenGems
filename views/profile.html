@@ -15,12 +15,14 @@
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-      href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu">
+      href="https://fonts.googleapis.com/css?family=Roboto|Josefin+Sans|Droid+Sans|Ubuntu|Montserrat|Vollkorn|Trebuchet">
 <link rel="stylesheet" type="text/css" href="css/profile.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 29f99c7399731f98015d97880c95860fd530a7ce
 </head>
-
 
 <body>
 	<nav class="my-navbar navbar navbar-inverse navbar-fixed-top">
@@ -37,28 +39,24 @@
 		</div>
 	</nav>
 
+	<h3 id="profile-title">Profile</h3>
 	<section id="profile-main">
-		<h3 id="profile-title">Profile</h3>
 		<div class="profile-content">
-		  
 			<div class="row">
-			    <div class="col-xs-6" border-right>
+			    <div class="col-xs-6">
 			    	<div class="row">
-			    		<div class=col-xs-4>
-			    			Image here
-			    		</div>
-			    		<div class=col-xs-8>
-			        		<p>Username:</p>
-			        		<p>Name:</p>
-			        		<p>Location:</p>
+			    		<div class="col-xs-3"><img id="profile-image"></div>
+			    		<div class="col-xs-9">
+			        		<p id="user_name">Username: </p>
+			        		<p id="user_rname">Name: </p>
+			        		<p id="user_location">Location: </p>
 			        	</div>
 			    	</div>
-			    	<vr>
 			    </div>
-			    <div class="col-xs-6">
-			        <p># Reviews Submitted</p>
-			        <p># Places Tried</p>
-			        <p>Friends</p>
+			    <div class="col-xs-6 lvr">
+			        <p id="user_numrev"># Reviews Submitted: </p>
+			        <p id="user_numvis"># Places Visited: </p>
+			        <p id="user_friendlist">Friends: </p>
 			    </div>
 		    </div>
 		</div>
@@ -66,8 +64,41 @@
 
 	<section id="profile-feed">
 		<div class="profile-content">
-		    <p>Feed</p>
+			<div class="row" style="padding-left: 2cm; padding-right: 2cm">
+		    	<h1>Feed</h1>
+		    	Diddy <img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 5!
+		    	<br>
+		    	Riese<img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 1...
+			</div>
 		</div>
 	</section>
+
+	<script>
+		var username = "Bob";
+
+		var script = document.createElement('script');
+        script.src = 'js/poi.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+		window.username_callback =  function(result){
+			for(var i=0; i<result.user.length;i++){
+				if(result.user[i].username == username){
+					document.getElementById('user_name').innerHTML = "Username: " + result.user[i].username;
+					document.getElementById('user_rname').innerHTML = "Name: " + result.user[i].name;
+					document.getElementById('user_location').innerHTML = "Location: " + result.user[i].location;
+					document.getElementById('user_numrev').innerHTML = "# Reviews Submitted: " + result.user[i].reviews;
+					document.getElementById('user_numvis').innerHTML = "# Places Visited: " + result.user[i].visited;
+					for(var j=0;j<result.user[i].friends.length;j++){
+
+						document.getElementById('user_friendlist').innerHTML = document.getElementById('user_friendlist').innerHTML + "<br><img src=\"" +  "https://u.o0bc.com/avatars/no-user-image.gif" + "\" height=\"40\" width=\"40\">" + result.user[i].friends[j];
+					}
+					if(result.user[i].image == null) document.getElementById("profile-image").src="https://u.o0bc.com/avatars/no-user-image.gif";
+					else document.getElementById("profile-image").src=result.user[i].image;
+					return;
+				}
+			}
+		}
+
+	</script>
 </body>
 </html>
