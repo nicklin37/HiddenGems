@@ -46,13 +46,20 @@
 		<p class="poi-text" id="poi-rating"></p>
 		<p class="poi-text" id="poi-reviews"></p>
 		<p class="poi-text" id="poi-address"></p>
-		<p class="poi-text" id="poi-coordinates"></p>
+		<p class="poi-text" id="poi-coordinates"></p><br>
 
-		<button class="rbutton" id="star1" style="visibility: hidden;">1</button>
-      	<button class="rbutton" id="star2" style="visibility: hidden;">2</button>
-     	<button class="rbutton" id="star3" style="visibility: hidden;">3</button>
-      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
-      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
+		<p id="instruction">Click on a red marker in the map above to discover the hidden gems!</p>
+
+		<p id="divline" style="visibility: hidden">==============================</p>
+		<p id="rate-stat" style="visibility: hidden">What do you think of this place? Rate it below!</p>
+		<div class="rate-buttons">
+			<button class="rbutton" id="star1" style="visibility: hidden;">1</button>
+	      	<button class="rbutton" id="star2" style="visibility: hidden;">2</button>
+	     	<button class="rbutton" id="star3" style="visibility: hidden;">3</button>
+	      	<button class="rbutton" id="star4" style="visibility: hidden;">4</button>
+	      	<button class="rbutton" id="star5" style="visibility: hidden;">5</button>
+      	</div>
+      	<p id="feedback" style="visibility: hidden">Thanks for the feedback!</p>
 	</div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -109,6 +116,14 @@
       		elem4.style.visibility = "visible";
       		var elem5 = document.getElementById("star5");
       		elem5.style.visibility = "visible";
+      		var divliner = document.getElementById("divline");
+      		divliner.style.visibility = "visible";
+      		var rateStat = document.getElementById("rate-stat");
+      		rateStat.style.visibility = "visible";
+      		var feed = document.getElementById("feedback");
+      		feed.style.visibility = "hidden";
+      		if(document.getElementById("instruction")) 
+      			document.getElementById("instruction").remove();
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
@@ -158,14 +173,17 @@
         	var zoom = map.getZoom();
 	        for(var i = 0; i < markers.length; i++) {
 	        	var rating = markers[i].rating;
-	        	if(zoom < 8)
+	        	var reviews = markers[i].reviews;
+	        	if(zoom < 7)
 	        		markers[i].setVisible(false);
-	        	else if(zoom < 14)
+	        	else if(zoom < 10)
+	        		markers[i].setVisible(reviews > 1000000);
+	        	else if(zoom < 13)
 	        		markers[i].setVisible(rating >= 4.85);
-	        	else if(zoom === 14)
-	        		markers[i].setVisible(rating >= 4.6);
+	        	else if(zoom < 15)
+	        		markers[i].setVisible((rating >= 4.6 || reviews > 50000));
 	        	else if(zoom === 15)
-	        		markers[i].setVisible(rating >= 4.3);
+	        		markers[i].setVisible((rating >= 4.3 || reviews > 2000));
 	        	else if(zoom === 16)
 	        		markers[i].setVisible(rating >= 4.0);
 	        	else if(zoom === 17)
@@ -186,6 +204,18 @@
 	  var index = 0;
 	  document.getElementById("star5").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -215,6 +245,18 @@
 	  });
 	  document.getElementById("star4").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -244,6 +286,18 @@
 	  });
 	  document.getElementById("star3").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -273,6 +327,18 @@
 	  });
 	  document.getElementById("star2").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;
@@ -302,6 +368,18 @@
 	  });
 	  document.getElementById("star1").addEventListener("click", function(){
 	  	index = 0;
+	  	var elem1 = document.getElementById("star1");
+      	elem1.style.visibility = "hidden";
+      	var elem2 = document.getElementById("star2");
+      	elem2.style.visibility = "hidden";
+      	var elem3 = document.getElementById("star3");
+      	elem3.style.visibility = "hidden";
+      	var elem4 = document.getElementById("star4");
+      	elem4.style.visibility = "hidden";
+      	var elem5 = document.getElementById("star5");
+      	elem5.style.visibility = "hidden";
+      	var feed = document.getElementById("feedback");
+      	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
     			var childKey = childSnapshot.key;

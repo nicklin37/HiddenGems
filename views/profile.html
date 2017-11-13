@@ -51,9 +51,9 @@
 			    	</div>
 			    </div>
 			    <div class="col-xs-4 lvr">
-			        <p id="user_numrev"># Reviews Submitted: </p>
-			        <p id="user_numvis"># Places Visited: </p>
-			        <p id="user_friendlist">Friends: </p>
+			        <p id="user_numrev">Reviews Submitted: </p>
+			        <p id="user_numvis">Places Visited: </p>
+			        <p id="user_friendlist">Friends (2): </p>
 			    </div>
 		    </div>
 		</div>
@@ -62,10 +62,10 @@
 	<section id="profile-feed">
 		<div class="profile-content">
 			<div class="row" style="padding-left: 2cm; padding-right: 2cm">
-		    	<h1>Feed</h1>
+		    	<h1>Feed</h1><!-- Hardcoded -->
 		    	Diddy <img src="https://www.what-dog.net/Images/faces2/scroll0015.jpg" height="30" width="30"> rated Diddy Riese a 5!
 		    	<br>
-		    	Riese <img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 1...
+		    	<div class="feed-alt"> Riese <img src="https://u.o0bc.com/avatars/no-user-image.gif" height="30" width="30"> rated Diddy Riese a 1 :'( </div>
 			</div>
 		</div>
 	</section>
@@ -92,8 +92,8 @@
 					document.getElementById('user_name').innerHTML = "Username: " + result.user[i].username;
 					document.getElementById('user_rname').innerHTML = "Name: " + result.user[i].name;
 					document.getElementById('user_location').innerHTML = "Location: " + result.user[i].location;
-					document.getElementById('user_numrev').innerHTML = "# Reviews Submitted: " + result.user[i].reviews;
-					document.getElementById('user_numvis').innerHTML = "# Places Visited: " + result.user[i].visited;
+					document.getElementById('user_numrev').innerHTML = "Reviews Submitted: " + result.user[i].reviews;
+					document.getElementById('user_numvis').innerHTML = "Places Visited: " + result.user[i].visited;
 					for(var j=0;j<result.user[i].friends.length;j++){
 
 						document.getElementById('user_friendlist').innerHTML = document.getElementById('user_friendlist').innerHTML + "<br><img src=\"" +  
