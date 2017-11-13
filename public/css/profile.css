@@ -8,7 +8,7 @@ body {
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 100px;
+	font-size: 70px;
 	font-family: "Montserrat";
 }
 
@@ -29,8 +29,8 @@ body {
 	border-radius: 25px;
     background: #ffffff;
     padding: 30px; 
-	font-size: 20px;
-	font-family: "Trebuchet";
+	font-size: 16px;
+	font-family: "Montserrat";
 }
 
 img {
