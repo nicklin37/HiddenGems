@@ -33,6 +33,10 @@ body {
 	font-family: "Montserrat";
 }
 
+.feed-alt{
+	background-color: rgba(155,155,155,0.2);
+}
+
 img {
 	max-width:100%;
 	max-height:100%;
