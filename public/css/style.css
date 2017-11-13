@@ -42,7 +42,11 @@ body{
 	font-size: 100px;
 	margin-top: 160px;
 	font-family: "Montserrat";
-
+	animation-name: fadein;
+	animation-delay: 0s;
+	animation-duration: 2.5s;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
 }
 
 .info{
@@ -53,17 +57,20 @@ body{
 	margin-top: 50px;
 	font-size: 20px;
 	font-family: "Vollkorn";
-	color: transparent;
 	animation-name: fadein;
-	animation-delay: 1s;
+	animation-delay: 0s;
 	animation-duration: 4s;
-	animation-iteration-count: infinite;
+	animation-iteration-count: 1;
 	animation-direction: alternate;
 }
 
 @keyframes fadein{
+	/*
 	from{color: transparent;}
 	to {color: black;}
+	*/
+	from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .info:hover{
