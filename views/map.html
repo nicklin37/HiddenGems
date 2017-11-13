@@ -43,11 +43,11 @@
 	<div class="poi">
 		<p class="poi-text" id="poi-name"></p>
 		<p class="poi-text" id="poi-rating"></p>
-      <button class="rbutton">1</button>
-      <button class="rbutton">2</button>
-      <button class="rbutton">3</button>
-      <button class="rbutton">4</button>
-      <button class="rbutton">5</button>
+      <button class="rbutton" id="star1">1</button>
+      <button class="rbutton" id="star2">2</button>
+      <button class="rbutton" id="star3">3</button>
+      <button class="rbutton" id="star4">4</button>
+      <button class="rbutton" id="star5">5</button>
 		<p class="poi-text" id="poi-reviews"></p>
 		<p class="poi-text" id="poi-address"></p>
 		<p class="poi-text" id="poi-coordinates"></p>
@@ -91,8 +91,11 @@
       }
       */
 
+      var lookup = "";
+
       function renderInfo(marker, name, rating, reviews, address, latitude, longitude) {
       	marker.addListener('click', ()=> {
+      		lookup = name;
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
@@ -136,13 +139,109 @@
         });
         // will change number of markers dependent on rating
         google.maps.event.addListener(map, 'zoom_changed', () => {
-	        for(var i = 0; i < markers.length; i++) {;
-	        	markers[i].setVisible(map.getZoom() >= 14)
+	        for(var i = 0; i < markers.length; i++) {
+	        	markers[i].setVisible(map.getZoom() >= 14);
 	        }
       	});
 	  });
 
 	  // write to database in terms of rating 
+	  var index = 0;
+	  document.getElementById("star5").addEventListener("click", function(){
+    	database.ref('/features/').once('value', function(snapshot) {
+    		snapshot.forEach(function(childSnapshot) {
+    			var childKey = childSnapshot.key;
+    			var childData = childSnapshot.val();
+    			var POIname = childData.name;
+    			if(POIname === lookup) {
+    				// update database rating
+    				var prevReviews = childData.reviews;
+    				var prevRating = childData.rating;
+    				var newReviews = prevReviews + 1;
+    				var newRating = (prevRating * prevReviews + 5) / newReviews;
+    				database.ref('/features/' + index + '/rating').set(newRating);
+    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    			}
+    			index++;
+    		});
+    	});
+	  });
+	  document.getElementById("star4").addEventListener("click", function(){
+    	database.ref('/features/').once('value', function(snapshot) {
+    		snapshot.forEach(function(childSnapshot) {
+    			var childKey = childSnapshot.key;
+    			var childData = childSnapshot.val();
+    			var POIname = childData.name;
+    			if(POIname === lookup) {
+    				// update database rating
+    				var prevReviews = childData.reviews;
+    				var prevRating = childData.rating;
+    				var newReviews = prevReviews + 1;
+    				var newRating = (prevRating * prevReviews + 4) / newReviews;
+    				database.ref('/features/' + index + '/rating').set(newRating);
+    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    			}
+    			index++;
+    		});
+    	});
+	  });
+	  document.getElementById("star3").addEventListener("click", function(){
+    	database.ref('/features/').once('value', function(snapshot) {
+    		snapshot.forEach(function(childSnapshot) {
+    			var childKey = childSnapshot.key;
+    			var childData = childSnapshot.val();
+    			var POIname = childData.name;
+    			if(POIname === lookup) {
+    				// update database rating
+    				var prevReviews = childData.reviews;
+    				var prevRating = childData.rating;
+    				var newReviews = prevReviews + 1;
+    				var newRating = (prevRating * prevReviews + 3) / newReviews;
+    				database.ref('/features/' + index + '/rating').set(newRating);
+    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    			}
+    			index++;
+    		});
+    	});
+	  });
+	  document.getElementById("star2").addEventListener("click", function(){
+    	database.ref('/features/').once('value', function(snapshot) {
+    		snapshot.forEach(function(childSnapshot) {
+    			var childKey = childSnapshot.key;
+    			var childData = childSnapshot.val();
+    			var POIname = childData.name;
+    			if(POIname === lookup) {
+    				// update database rating
+    				var prevReviews = childData.reviews;
+    				var prevRating = childData.rating;
+    				var newReviews = prevReviews + 1;
+    				var newRating = (prevRating * prevReviews + 2) / newReviews;
+    				database.ref('/features/' + index + '/rating').set(newRating);
+    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    			}
+    			index++;
+    		});
+    	});
+	  });
+	  document.getElementById("star1").addEventListener("click", function(){
+    	database.ref('/features/').once('value', function(snapshot) {
+    		snapshot.forEach(function(childSnapshot) {
+    			var childKey = childSnapshot.key;
+    			var childData = childSnapshot.val();
+    			var POIname = childData.name;
+    			if(POIname === lookup) {
+    				// update database rating
+    				var prevReviews = childData.reviews;
+    				var prevRating = childData.rating;
+    				var newReviews = prevReviews + 1;
+    				var newRating = (prevRating * prevReviews + 1) / newReviews;
+    				database.ref('/features/' + index + '/rating').set(newRating);
+    				database.ref('/features/' + index + '/reviews').set(newReviews);
+    			}
+    			index++;
+    		});
+    	});
+	  });
     </script>
 	
     <script async defer
