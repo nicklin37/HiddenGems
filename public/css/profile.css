@@ -5,11 +5,17 @@ body {
 
 #profile-title {
 	color: black;
-	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 70px;
+	font-size: 48px;
+	padding-top: 10px;
 	font-family: "Montserrat";
+}
+
+#feedtext {
+	font-size: 48px;
+	font-family: "Montserrat";
+	text-align: center;
 }
 
 #profile-main{
