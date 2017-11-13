@@ -48,6 +48,8 @@
 		<p class="poi-text" id="poi-address"></p>
 		<p class="poi-text" id="poi-coordinates"></p><br>
 
+		<p id="instruction">Click on a red marker in the map above to discover the hidden gems!</p>
+
 		<p id="divline" style="visibility: hidden">==============================</p>
 		<p id="rate-stat" style="visibility: hidden">What do you think of this place? Rate it below!</p>
 		<div class="rate-buttons">
@@ -120,6 +122,8 @@
       		rateStat.style.visibility = "visible";
       		var feed = document.getElementById("feedback");
       		feed.style.visibility = "hidden";
+      		if(document.getElementById("instruction")) 
+      			document.getElementById("instruction").remove();
 	      	document.getElementById("poi-name").innerHTML = "Name: " + name;
 	      	document.getElementById("poi-rating").innerHTML = "Rating: " + rating;
 	      	document.getElementById("poi-reviews").innerHTML = "Reviews: " + reviews;
