@@ -71,30 +71,30 @@
 	</section>
 
 	<script>
-		var username = "Bob";
+		let username = "Bob";
 
-		var script = document.createElement('script');
+		let script = document.createElement('script');
         script.src = 'js/poi.js';
         document.getElementsByTagName('head')[0].appendChild(script);
 
 
 
-		window.username_callback =  function(result){
-			function getFriendImage(friend_name){
-				for(var k=0; k<result.user.length;k++){
+		window.username_callback =  (result) => {
+			function getFriendImage(friend_name) {
+				for(let k=0; k<result.user.length;k++){
 					if(result.user[k].username == friend_name) return result.user[k].image;
 				}
 				return "https://u.o0bc.com/avatars/no-user-image.gif";
 			}
 
-			for(var i=0; i<result.user.length;i++){
+			for(let i=0; i<result.user.length;i++){
 				if(result.user[i].username == username){
 					document.getElementById('user_name').innerHTML = "Username: " + result.user[i].username;
 					document.getElementById('user_rname').innerHTML = "Name: " + result.user[i].name;
 					document.getElementById('user_location').innerHTML = "Location: " + result.user[i].location;
 					document.getElementById('user_numrev').innerHTML = "Reviews Submitted: " + result.user[i].reviews;
 					document.getElementById('user_numvis').innerHTML = "Places Visited: " + result.user[i].visited;
-					for(var j=0;j<result.user[i].friends.length;j++){
+					for(let j=0;j<result.user[i].friends.length;j++){
 
 						document.getElementById('user_friendlist').innerHTML = document.getElementById('user_friendlist').innerHTML + "<br><img src=\"" +  
 						getFriendImage(result.user[i].friends[j]) + "\" height=\"40\" width=\"40\">" + result.user[i].friends[j];
