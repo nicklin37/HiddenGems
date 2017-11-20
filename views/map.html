@@ -67,7 +67,7 @@
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
 	<script>
 		// Initialize Firebase
-	  var config = {
+	  let config = {
 	    apiKey: "AIzaSyAy6xB9KvplggjQUNA1Bk28M4adiDeOn8Y",
 	    authDomain: "hiddengems-185818.firebaseapp.com",
 	    databaseURL: "https://hiddengems-185818.firebaseio.com",
@@ -76,11 +76,11 @@
 	    messagingSenderId: "865980313875"
 	  };
 	  firebase.initializeApp(config);
-	  var database = firebase.database();
+	  let database = firebase.database();
 
-      var map;
-      var markers = [];
-      function initMap() {
+      let map;
+      let markers = [];
+      initMap = () => {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
           center: new google.maps.LatLng(34.0689,-118.4452),
@@ -88,7 +88,7 @@
         });
 
         // Create a <script> tag and set the USGS URL as the source.
-        // var script = document.createElement('script');
+        // let script = document.createElement('script');
         // This example uses a local copy of the GeoJSON stored at
         // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
         // script.src = 'js/poi.js';
@@ -100,27 +100,27 @@
       }
       */
 
-      var lookup = "";
+      let lookup = "";
 
       function renderInfo(marker, name, rating, reviews, address, latitude, longitude) {
       	marker.addListener('click', ()=> {
       		lookup = name;
       		rating = Math.round(rating * 100) / 100;
-      		var elem1 = document.getElementById("star1");
+      		let elem1 = document.getElementById("star1");
       		elem1.style.visibility = "visible";
-      		var elem2 = document.getElementById("star2");
+      		let elem2 = document.getElementById("star2");
       		elem2.style.visibility = "visible";
-      		var elem3 = document.getElementById("star3");
+      		let elem3 = document.getElementById("star3");
       		elem3.style.visibility = "visible";
-      		var elem4 = document.getElementById("star4");
+      		let elem4 = document.getElementById("star4");
       		elem4.style.visibility = "visible";
-      		var elem5 = document.getElementById("star5");
+      		let elem5 = document.getElementById("star5");
       		elem5.style.visibility = "visible";
-      		var divliner = document.getElementById("divline");
+      		let divliner = document.getElementById("divline");
       		divliner.style.visibility = "visible";
-      		var rateStat = document.getElementById("rate-stat");
+      		let rateStat = document.getElementById("rate-stat");
       		rateStat.style.visibility = "visible";
-      		var feed = document.getElementById("feedback");
+      		let feed = document.getElementById("feedback");
       		feed.style.visibility = "hidden";
       		if(document.getElementById("instruction")) 
       			document.getElementById("instruction").remove();
@@ -133,7 +133,7 @@
 	    });
       }
 
-      // var addr = database.ref("/features").once('value').then(function(s){
+      // let addr = database.ref("/features").once('value').then(function(s){
       		// console.log(s.val());
       // });
 
@@ -146,19 +146,19 @@
       // firebase
       database.ref('/features/').once('value', function(snapshot) {
   		snapshot.forEach(function(childSnapshot) {
-	      var childKey = childSnapshot.key;
+	      let childKey = childSnapshot.key;
 	      // console.log("Child key", childKey);
-	      var childData = childSnapshot.val();
+	      let childData = childSnapshot.val();
 	      // console.log(childData);
-	      var coords = childData.coordinates;
-          var POIname = childData.name;
-          var POIrating = childData.rating;
-          var POIreviews = childData.reviews;
-          var POIaddress = childData.address;
-          var POIlatitude = coords.x;
-          var POIlongitude = coords.y;
-          var latLng = new google.maps.LatLng(POIlatitude, POIlongitude);
-          var marker = new google.maps.Marker({
+	      let coords = childData.coordinates;
+          let POIname = childData.name;
+          let POIrating = childData.rating;
+          let POIreviews = childData.reviews;
+          let POIaddress = childData.address;
+          let POIlatitude = coords.x;
+          let POIlongitude = coords.y;
+          let latLng = new google.maps.LatLng(POIlatitude, POIlongitude);
+          let marker = new google.maps.Marker({
           	position: latLng,
 	        map: map,
 	        rating: POIrating,
@@ -170,10 +170,10 @@
         });
         // depending on rating, change which markers you would like to show
         google.maps.event.addListener(map, 'zoom_changed', () => {
-        	var zoom = map.getZoom();
-	        for(var i = 0; i < markers.length; i++) {
-	        	var rating = markers[i].rating;
-	        	var reviews = markers[i].reviews;
+        	let zoom = map.getZoom();
+	        for(let i = 0; i < markers.length; i++) {
+	        	let rating = markers[i].rating;
+	        	let reviews = markers[i].reviews;
 	        	if(zoom < 7)
 	        		markers[i].setVisible(false);
 	        	else if(zoom < 10)
@@ -201,40 +201,40 @@
 	  });
 
 	  // update database fields in terms of reviews and rating 
-	  var index = 0;
+	  let index = 0;
 	  document.getElementById("star5").addEventListener("click", function(){
 	  	index = 0;
-	  	var elem1 = document.getElementById("star1");
+	  	let elem1 = document.getElementById("star1");
       	elem1.style.visibility = "hidden";
-      	var elem2 = document.getElementById("star2");
+      	let elem2 = document.getElementById("star2");
       	elem2.style.visibility = "hidden";
-      	var elem3 = document.getElementById("star3");
+      	let elem3 = document.getElementById("star3");
       	elem3.style.visibility = "hidden";
-      	var elem4 = document.getElementById("star4");
+      	let elem4 = document.getElementById("star4");
       	elem4.style.visibility = "hidden";
-      	var elem5 = document.getElementById("star5");
+      	let elem5 = document.getElementById("star5");
       	elem5.style.visibility = "hidden";
-      	var feed = document.getElementById("feedback");
+      	let feed = document.getElementById("feedback");
       	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
-    			var childKey = childSnapshot.key;
-    			var childData = childSnapshot.val();
-    			var POIname = childData.name;
+    			let childKey = childSnapshot.key;
+    			let childData = childSnapshot.val();
+    			let POIname = childData.name;
     			if(POIname === lookup) {
     				// update database rating
-    				var prevReviews = childData.reviews;
-    				var prevRating = childData.rating;
-    				var newReviews = prevReviews + 1;
-    				var newRating = (prevRating * prevReviews + 5) / newReviews;
-    				var data = {
+    				let prevReviews = childData.reviews;
+    				let prevRating = childData.rating;
+    				let newReviews = prevReviews + 1;
+    				let newRating = (prevRating * prevReviews + 5) / newReviews;
+    				let data = {
     					name: childData.name,
     					address: childData.address,
     					coordinates: childData.coordinates,
     					reviews: newReviews,
     					rating: newRating
     				};
-    				var updates = {};
+    				let updates = {};
     				updates['/features/' + index] = data;
     				database.ref().update(updates);
     				return;
@@ -245,37 +245,37 @@
 	  });
 	  document.getElementById("star4").addEventListener("click", function(){
 	  	index = 0;
-	  	var elem1 = document.getElementById("star1");
+	  	let elem1 = document.getElementById("star1");
       	elem1.style.visibility = "hidden";
-      	var elem2 = document.getElementById("star2");
+      	let elem2 = document.getElementById("star2");
       	elem2.style.visibility = "hidden";
-      	var elem3 = document.getElementById("star3");
+      	let elem3 = document.getElementById("star3");
       	elem3.style.visibility = "hidden";
-      	var elem4 = document.getElementById("star4");
+      	let elem4 = document.getElementById("star4");
       	elem4.style.visibility = "hidden";
-      	var elem5 = document.getElementById("star5");
+      	let elem5 = document.getElementById("star5");
       	elem5.style.visibility = "hidden";
-      	var feed = document.getElementById("feedback");
+      	let feed = document.getElementById("feedback");
       	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
-    			var childKey = childSnapshot.key;
-    			var childData = childSnapshot.val();
-    			var POIname = childData.name;
+    			let childKey = childSnapshot.key;
+    			let childData = childSnapshot.val();
+    			let POIname = childData.name;
     			if(POIname === lookup) {
     				// update database rating
-    				var prevReviews = childData.reviews;
-    				var prevRating = childData.rating;
-    				var newReviews = prevReviews + 1;
-    				var newRating = (prevRating * prevReviews + 4) / newReviews;
-    				var data = {
+    				let prevReviews = childData.reviews;
+    				let prevRating = childData.rating;
+    				let newReviews = prevReviews + 1;
+    				let newRating = (prevRating * prevReviews + 4) / newReviews;
+    				let data = {
     					name: childData.name,
     					address: childData.address,
     					coordinates: childData.coordinates,
     					reviews: newReviews,
     					rating: newRating
     				};
-    				var updates = {};
+    				let updates = {};
     				updates['/features/' + index] = data;
     				database.ref().update(updates);
     				return;
@@ -286,37 +286,37 @@
 	  });
 	  document.getElementById("star3").addEventListener("click", function(){
 	  	index = 0;
-	  	var elem1 = document.getElementById("star1");
+	  	let elem1 = document.getElementById("star1");
       	elem1.style.visibility = "hidden";
-      	var elem2 = document.getElementById("star2");
+      	let elem2 = document.getElementById("star2");
       	elem2.style.visibility = "hidden";
-      	var elem3 = document.getElementById("star3");
+      	let elem3 = document.getElementById("star3");
       	elem3.style.visibility = "hidden";
-      	var elem4 = document.getElementById("star4");
+      	let elem4 = document.getElementById("star4");
       	elem4.style.visibility = "hidden";
-      	var elem5 = document.getElementById("star5");
+      	let elem5 = document.getElementById("star5");
       	elem5.style.visibility = "hidden";
-      	var feed = document.getElementById("feedback");
+      	let feed = document.getElementById("feedback");
       	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
-    			var childKey = childSnapshot.key;
-    			var childData = childSnapshot.val();
-    			var POIname = childData.name;
+    			let childKey = childSnapshot.key;
+    			let childData = childSnapshot.val();
+    			let POIname = childData.name;
     			if(POIname === lookup) {
     				// update database rating
-    				var prevReviews = childData.reviews;
-    				var prevRating = childData.rating;
-    				var newReviews = prevReviews + 1;
-    				var newRating = (prevRating * prevReviews + 3) / newReviews;
-    				var data = {
+    				let prevReviews = childData.reviews;
+    				let prevRating = childData.rating;
+    				let newReviews = prevReviews + 1;
+    				let newRating = (prevRating * prevReviews + 3) / newReviews;
+    				let data = {
     					name: childData.name,
     					address: childData.address,
     					coordinates: childData.coordinates,
     					reviews: newReviews,
     					rating: newRating
     				};
-    				var updates = {};
+    				let updates = {};
     				updates['/features/' + index] = data;
     				database.ref().update(updates);
     				return;
@@ -327,37 +327,37 @@
 	  });
 	  document.getElementById("star2").addEventListener("click", function(){
 	  	index = 0;
-	  	var elem1 = document.getElementById("star1");
+	  	let elem1 = document.getElementById("star1");
       	elem1.style.visibility = "hidden";
-      	var elem2 = document.getElementById("star2");
+      	let elem2 = document.getElementById("star2");
       	elem2.style.visibility = "hidden";
-      	var elem3 = document.getElementById("star3");
+      	let elem3 = document.getElementById("star3");
       	elem3.style.visibility = "hidden";
-      	var elem4 = document.getElementById("star4");
+      	let elem4 = document.getElementById("star4");
       	elem4.style.visibility = "hidden";
-      	var elem5 = document.getElementById("star5");
+      	let elem5 = document.getElementById("star5");
       	elem5.style.visibility = "hidden";
-      	var feed = document.getElementById("feedback");
+      	let feed = document.getElementById("feedback");
       	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
-    			var childKey = childSnapshot.key;
-    			var childData = childSnapshot.val();
-    			var POIname = childData.name;
+    			let childKey = childSnapshot.key;
+    			let childData = childSnapshot.val();
+    			let POIname = childData.name;
     			if(POIname === lookup) {
     				// update database rating
-    				var prevReviews = childData.reviews;
-    				var prevRating = childData.rating;
-    				var newReviews = prevReviews + 1;
-    				var newRating = (prevRating * prevReviews + 2) / newReviews;
-    				var data = {
+    				let prevReviews = childData.reviews;
+    				let prevRating = childData.rating;
+    				let newReviews = prevReviews + 1;
+    				let newRating = (prevRating * prevReviews + 2) / newReviews;
+    				let data = {
     					name: childData.name,
     					address: childData.address,
     					coordinates: childData.coordinates,
     					reviews: newReviews,
     					rating: newRating
     				};
-    				var updates = {};
+    				let updates = {};
     				updates['/features/' + index] = data;
     				database.ref().update(updates);
     				return;
@@ -368,37 +368,37 @@
 	  });
 	  document.getElementById("star1").addEventListener("click", function(){
 	  	index = 0;
-	  	var elem1 = document.getElementById("star1");
+	  	let elem1 = document.getElementById("star1");
       	elem1.style.visibility = "hidden";
-      	var elem2 = document.getElementById("star2");
+      	let elem2 = document.getElementById("star2");
       	elem2.style.visibility = "hidden";
-      	var elem3 = document.getElementById("star3");
+      	let elem3 = document.getElementById("star3");
       	elem3.style.visibility = "hidden";
-      	var elem4 = document.getElementById("star4");
+      	let elem4 = document.getElementById("star4");
       	elem4.style.visibility = "hidden";
-      	var elem5 = document.getElementById("star5");
+      	let elem5 = document.getElementById("star5");
       	elem5.style.visibility = "hidden";
-      	var feed = document.getElementById("feedback");
+      	let feed = document.getElementById("feedback");
       	feed.style.visibility = "visible";
     	database.ref('/features/').once('value', function(snapshot) {
     		snapshot.forEach(function(childSnapshot) {
-    			var childKey = childSnapshot.key;
-    			var childData = childSnapshot.val();
-    			var POIname = childData.name;
+    			let childKey = childSnapshot.key;
+    			let childData = childSnapshot.val();
+    			let POIname = childData.name;
     			if(POIname === lookup) {
     				// update database rating
-    				var prevReviews = childData.reviews;
-    				var prevRating = childData.rating;
-    				var newReviews = prevReviews + 1;
-    				var newRating = (prevRating * prevReviews + 1) / newReviews;
-    				var data = {
+    				let prevReviews = childData.reviews;
+    				let prevRating = childData.rating;
+    				let newReviews = prevReviews + 1;
+    				let newRating = (prevRating * prevReviews + 1) / newReviews;
+    				let data = {
     					name: childData.name,
     					address: childData.address,
     					coordinates: childData.coordinates,
     					reviews: newReviews,
     					rating: newRating
     				};
-    				var updates = {};
+    				let updates = {};
     				updates['/features/' + index] = data;
     				database.ref().update(updates);
     				return;
