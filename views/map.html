@@ -86,19 +86,7 @@
           center: new google.maps.LatLng(34.0689,-118.4452),
           // mapTypeId: 'terrain'
         });
-
-        // Create a <script> tag and set the USGS URL as the source.
-        // let script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        // script.src = 'js/poi.js';
-        // document.getElementsByTagName('head')[0].appendChild(script);
       }
-      /*
-      function renderInfo(e) {
-      	document.getElementById("poi-name").innerHTML = "Name: " + marker.name;
-      }
-      */
 
       let lookup = "";
 
@@ -131,17 +119,7 @@
 	      	let coordinates = latitude + ", " + longitude;
 	      	document.getElementById("poi-coordinates").innerHTML = "Coordinates: " + coordinates;
 	    });
-      }
-
-      // let addr = database.ref("/features").once('value').then(function(s){
-      		// console.log(s.val());
-      // });
-
-/*
-      database.ref('/features/' + 0 + '/address').once('value').then(function(s) {
-      	console.log(s.val());
-      });
-      */
+    }
 
       // firebase
       database.ref('/features/').once('value', function(snapshot) {
@@ -411,7 +389,7 @@
     </script>
 	
     <script async defer
-  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdpUvwoJeHyCvbCmhEpwnm0nwKZW6Vc&callback=initMap">
+  		src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap">
 	</script>
 </body>
 </html>
