@@ -2,6 +2,9 @@
 
 As avid adventurers who desire to make the most out of a vacation or some location, it is often frustrating to have to sift through multiple websites to find the most worthwhile points of interests. What if you have limited time to visit a city, for example? This project provides a solution to these problems by using crowdsourced data to generate the most worthwhile and valuable attractions at a glimpse of the map! The lower quality attractions get filtered out while the higher quality attractions stand out, in terms of popularity and the rating of the point of interest.
 
+##Languages Used in this Project
+This project utilized HTML/CSS and Javascript to create the front-end design. The landing page, map page, and profile page were all coded with HTMl and CSS. The Google Maps API and Firebase were implemented with JavaScript.
+
 ## Instructions
 To run this project, git clone this repository by running the following command in terminal:
 
